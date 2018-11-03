@@ -1,6 +1,6 @@
 # Readme
 
-% ju -- https://bw1.eu -- 26-Okt-18  -- Readme.md
+% ju -- https://bw1.eu -- 3-11-18  -- Readme.md
 
 ## Hinweis
 
