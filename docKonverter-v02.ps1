@@ -60,6 +60,9 @@ $thema = "RaspberryPi-Kochbuch" # Thema
 $bildformat = "svg"    # Bildformate: svg, jpg, png
 $codeformat = "py"     # Codeformate: c, cpp, sh, py, ps1
 $language = "Python"   # Latex-Code:  C, [LaTeX]TeX, Bash, Python, Powershell
+$codeformat2 = "sh"     # Codeformate: c, cpp, sh, py, ps1
+$language2 = "Bash"   # Latex-Code:  C, [LaTeX]TeX, Bash, Python, Powershell
+
 #
 #$doc = "doc"
 $tex = "tex"
@@ -455,7 +458,7 @@ while($nochmal){
     #$language = "Python"   # Latex-Code:  C, [LaTeX]TeX, Bash, Python
     # schreibe in datei
     $file =  "Quellcode.tex"
-    $text = "\section{Quellcode}\label{quellcode}`n"
+    $text = "\section{Quellcode $language}\label{quellcode}`n"
     $text | Set-Content $tex/$file  
     $filter = "*.$codeformat"
     [array]$arrayCode = ls -Path $code -Filter $filter -Recurse -Force 
@@ -480,6 +483,34 @@ while($nochmal){
 \newpage`n" 
       $text | Add-Content $tex/$file
     }
+
+        # schreibe in datei
+        $file =  "Quellcode2.tex"
+        $text = "\section{Quellcode $language2}\label{quellcode}`n"
+        $text | Set-Content $tex/$file  
+        $filter = "*.$codeformat2"
+        [array]$arrayCode = ls -Path $code -Filter $filter -Recurse -Force 
+        # array auslesen
+        for($n=0; $n -lt $arrayCode.length; $n++){ # kleiner
+          $name = "$($arrayCode[$n])"              # file.tex
+          $basename = "$($arrayCode.BaseName[$n])" # file
+          #"$n - $basename"
+          # schreibe in datei 
+          $text = "\subsection{$basename}\label{}`n
+    % Quellcode Referenz
+    (\autoref{code:$basename} $basename). % codename anpassen!
+    % Quellcode aus ext. Datei
+    \lstset{language=$language2}% cpp, [LaTeX]TeX, Bash, Python
+    \lstinputlisting[%numbers=left, frame=l, framerule=0.1pt,
+      % =====================
+      caption={Quellcode in $language2, $basename}, % Caption  anpassen!
+      label={code:$basename}                       % Referenz anpassen!
+      % =====================
+    ]{$code/$basename.$codeformat2}% ext. Datei
+    
+    \newpage`n" 
+          $text | Add-Content $tex/$file
+        }
   } 
 
   # backup
@@ -545,14 +576,21 @@ while($nochmal){
 
     # html: alle-Code-files.html
     "+++ alle-Code-files.html"
-    $fileTitel = "Code"
+    $fileTitel = "Code $language"
     $fileHTML  = "alle-Code-files.html"
     $fileTyp   = $code
     $filter    = "*.$codeformat" # Codeformate: c, cpp, sh, py
     ### Funktionsaufruf: 
     htmlFiles $fileTitel $fileHTML $fileTyp $filter
 
-    
+    # html: alle-Code-files.html
+    "+++ alle-Code-files2.html"
+    $fileTitel = "Code $language"
+    $fileHTML  = "alle-Code-files2.html"
+    $fileTyp   = $code
+    $filter    = "*.$codeformat2" # Codeformate: c, cpp, sh, py
+    ### Funktionsaufruf: 
+    htmlFiles $fileTitel $fileHTML $fileTyp $filter
 
     "+++ alle-Pics.html"
     $titel = "Pics"
