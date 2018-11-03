@@ -47,11 +47,11 @@ Git: <https://git-scm.com/downloads>
 Imagemagick: <https://www.imagemagick.org/script/download.php#windows>
 
 
-## Repository raspberryPi von Github downloaden
+## Repository piMonk von Github downloaden
 
 ~~~
   # Shell: Kopie downloaden
-  $ git clone https://github.com/ju-bw/raspberryPi.git .
+  $ git clone https://github.com/ju-bw/piMonk.git .
 ~~~
 
 ## neues Repository auf github anlegen
@@ -59,13 +59,13 @@ Imagemagick: <https://www.imagemagick.org/script/download.php#windows>
 ~~~
   # https://github.com/new
   # github: Create a new repository
-  # Repository name = raspberryPi
+  # Repository name = piMonk
   # Shell: Git Befehle
   # ".gitconfig", ".gitignore" konfigurieren und erstellen
   git init
   git add .
   git commit -am "Projekt start"
-  git remote add origin https://github.com/ju-bw/raspberryPi.git
+  git remote add origin https://github.com/ju-bw/piMonk.git
   git push -u origin master 
   git status
   git pull
@@ -87,7 +87,7 @@ Beachte das *min. zwei Markdowndateien* vorhanden sein müssen.
   # Editor - Powershellscript "docKonverter-v02.ps1" anpassen
     ### Projekt
     # anpassen
-    $thema = "raspberryPi" # Thema
+    $thema = "piMonk" # Thema
     $bildformat = "svg"    # Bildformate: svg, jpg, png
     $codeformat = "sh"     # Codeformate: c, cpp, sh, py, ps1
     $language = "Powershell"   # Latex-Code:  C, [LaTeX]TeX, Bash, Python, Powershell
